@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Create Account | Addiction Management</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div class="auth-container">
+  <h2 class="auth-title">Create an Account</h2>
+  <form id="signupForm" class="auth-form">
+    <div class="input-group">
+      <label for="name">Name</label>
+      <input type="text" id="name" placeholder="Your Name" required />
+    </div>
+    <div class="input-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="you@example.com" required />
+    </div>
+    <div class="input-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="Create Password" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Create Account</button>
+  </form>
+  <p>Already have an account? <a href="login.html">Login here</a></p>
+</div>
+<script>
+  document.getElementById('signupForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+    if(name && email && password){
+      localStorage.setItem('user', JSON.stringify({name, email, password}));
+      // Proceed to setup monthly plan and addiction info
+      window.location.href='setup.html';
+    }
+  });
+</script>
+</body>
+</html>

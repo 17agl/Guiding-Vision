@@ -1,0 +1,113 @@
+/* Reset & base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #fdfaf0; /* warm white background */
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Colors palette */
+:root {
+  --primary-green: #4CAF50;
+  --accent-yellow: #FFC107;
+  --background-white: #fdfaf0;
+  --white: #fff;
+  --shadow: rgba(0, 0, 0, 0.1);
+  --font-heading: 'Roboto', sans-serif;
+}
+
+/* Header styles */
+.intro-header {
+  background: linear-gradient(135deg, #81c784, #66bb6a);
+  padding: 60px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.header-content {
+  max-width: 800px;
+  z-index: 2;
+}
+h1 {
+  font-size: 2.8rem;
+  margin-bottom: 20px;
+  color: #fff;
+  font-weight: 700;
+}
+p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  color: #fff;
+}
+.btn {
+  padding: 14px 28px;
+  font-size: 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.btn-primary {
+  background-color: var(--primary-green);
+  color: #fff;
+}
+.btn-primary:hover {
+  background-color: #388e3c;
+}
+
+/* Introduction image section */
+.intro-section {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+.intro-image-container {
+  max-width: 700px;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px var(--shadow);
+}
+.intro-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+.intro-image:hover {
+  transform: scale(1.02);
+}
+
+/* Wave background */
+.wave-background {
+  position: absolute;
+  bottom: -50px;
+  width: 100%;
+  height: 150px;
+  background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80');
+  background-size: cover;
+  opacity: 0.2;
+  z-index: 1;
+}
+
+/* Responsive design */
+@media(max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+  p {
+    font-size: 1rem;
+  }
+  .btn {
+    padding: 12px 24px;
+    font-size: 0.9rem;
+  }
+}

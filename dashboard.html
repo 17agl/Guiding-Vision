@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dashboard | Addiction Management</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Styles -->
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header class="dashboard-header">
+  <h1>My Progress Dashboard</h1>
+  <nav class="dashboard-nav" id="navbar">
+    <a href="#" onclick="showSection('home')">Home</a>
+    <a href="#" onclick="showSection('profile')">Profile</a>
+    <a href="#" onclick="showSection('tasks')">Today's Tasks</a>
+    <a href="#" onclick="showSection('workflow')">Workflow</a>
+    <a href="#" onclick="showSection('support')">Support</a>
+    <a href="#" onclick="showSection('progress')">Progress</a>
+    <a href="#" onclick="showSection('motivation')">Motivation</a>
+    <a href="#" onclick="showSection('rewards')">Rewards</a>
+    <a href="#" onclick="showSection('savings')">Savings</a>
+    <a href="#" onclick="showSection('userProfile')">Profile</a>
+    <a href="index.html" class="logout-btn">Logout</a>
+  </nav>
+</header>
+
+<main id="main-content" style="padding:20px; max-width:1200px; margin:auto;">
+
+<!-- Home / Welcome message -->
+<div id="home" class="section">
+  <h2>Welcome to Addiction Management System</h2>
+  <p>Navigate through the sections to manage your journey towards recovery.</p>
+  <div class="quote-section" id="homeQuotes"></div>
+</div>
+
+<!-- Profile -->
+<div id="profile" class="section" style="display:none;">
+  <h2>User Profile</h2>
+  <div id="profileDetails"></div>
+  <button class="btn btn-secondary" onclick="editProfile()">Edit Profile</button>
+</div>
+
+<!-- Today's Tasks -->
+<div id="tasks" class="section" style="display:none;">
+  <h2>Today's Tasks</h2>
+  <div id="taskDisplay"></div>
+  <button class="btn btn-secondary" onclick="showTaskForm()">Add/Edit Tasks</button>
+  <div id="taskFormContainer" style="display:none;">
+    <form id="taskForm">
+      <label for="taskAddiction">Addiction</label>
+      <select id="taskAddiction" required></select>
+      <label for="taskDate">Date</label>
+      <input type="date" id="taskDate" required />
+      <label for="taskFrequency">Frequency</label>
+      <input type="number" id="taskFrequency" min="1" required />
+      <button type="submit" class="btn btn-primary">Save Task</button>
+    </form>
+  </div>
+  <div>
+    <h4>Set from your Monthly Plan</h4>
+    <select id="monthlyPlanSelect"></select>
+    <button class="btn btn-primary" onclick="setTaskFromPlan()">Set Task</button>
+  </div>
+</div>
+
+<!-- Workflow & Advice -->
+<div id="workflow" class="section" style="display:none;">
+  <h2>Workflow & Advice</h2>
+  <div id="workflowContent"></div>
+</div>
+
+<!-- Psychological Support -->
+<div id="support" class="section" style="display:none;">
+  <h2>Psychological Support</h2>
+  <div id="supportQuotes"></div>
+  <p>Access resources, chat, and support groups here.</p>
+</div>
+
+<!-- Progress Graph -->
+<div id="progress" class="section" style="display:none;">
+  <h2>Weekly Progress</h2>
+  <canvas id="weeklyProgressChart" height="300"></canvas>
+</div>
+
+<!-- Motivation -->
+<div id="motivation" class="section" style="display:none;">
+  <h2>Motivational Thoughts</h2>
+  <div id="motivationalQuotes"></div>
+</div>
+
+<!-- Rewards -->
+<div id="rewards" class="section" style="display:none;">
+  <h2>Rewards</h2>
+  <div id="badgesContainer"></div>
+</div>
+
+<!-- Savings -->
+<div id="savings" class="section" style="display:none;">
+  <h2>Savings</h2>
+  <div id="savingsDisplay"></div>
+  <button class="btn btn-primary" onclick="addSavings()">Add Savings</button>
+</div>
+
+<!-- User Profile Editing -->
+<div id="editProfile" class="section" style="display:none;">
+  <h2>Edit Profile</h2>
+  <form id="profileForm">
+    <label>Name</label>
+    <input type="text" id="editName" required />
+    <label>Email</label>
+    <input type="email" id="editEmail" required />
+    <label>Age</label>
+    <input type="number" id="editAge" required />
+    <label>Gender</label>
+    <select id="editGender" required></select>
+    <label>Profile Photo URL</label>
+    <input type="text" id="editPhoto" />
+    <button type="submit" class="btn btn-primary">Save</button>
+  </form>
+</div>
+
+</main>
+<!-- Inside dashboard.html, at the top -->
+<script>// Check login status
+  document.addEventListener('DOMContentLoaded', () => {
+    const loggedIn = localStorage.getItem('loggedIn');
+    if (loggedIn !== 'true') {
+      alert('Please log in first.');
+      window.location.href = 'login.html';
+    }
+  });
+</script>// --- IGNORE ---
+<script>
+  // --- Utility functions ---
+  function showSection(id) {
+    const sections = document.querySelectorAll('.section');
+    sections.forEach(s => s.style.display='none');
+    document.getElementById(id).style.display='block';
+    // Load data if needed
+    if(id==='profile') loadProfile();
+    if(id==='tasks') loadTask();
+    if(id==='progress') loadWeeklyProgress();
+    if(id==='rewards') renderBadges();
+    if(id==='savings') loadSavings();
+    if(id==='profile') loadProfileDetails();
+    if(id==='home') loadQuotes();
+    if(id==='support') loadSupportQuotes();
+    if(id==='motivational') loadMotivationalQuotes();
+  }
+
+  // --- Load user session ---
+  let user = JSON.parse(localStorage.getItem('sessionUser'));
+  if(!user) {
+    alert('Please login first.');
+    window.location.href='login.html';
+  }
+
+  // --- Profile ---
+  function loadProfile() {
+    // Save user data
+    localStorage.setItem('user', JSON.stringify(user));
+  }
+
+  function loadProfileDetails() {
+    // Show user details
+    document.getElementById('profileDetails').innerHTML = `
+      <img src="${user.profilePhoto}" width="150" style="border-radius:50%; margin-bottom:10px;"/>
+      <p>Name: ${user.name}</p>
+      <p>Email: ${user.email}</p>
+      <p>Age: ${user.age}</p>
+      <p>Gender: ${user.gender}</p>
+    `;
+  }
+
+  function editProfile() {
+    // Show form with current data
+    document.getElementById('editProfile').style.display='block';
+    document.querySelector('#profile').style.display='none';
+    document.getElementById('editName').value = user.name;
+    document.getElementById('editEmail').value = user.email;
+    document.getElementById('editAge').value = user.age;
+    document.getElementById('editGender').innerHTML = `
+      <option value="Male" ${user.gender==='Male'?'selected':''}>Male</option>
+      <option value="Female" ${user.gender==='Female'?'selected':''}>Female</option>
+      <option value="Other" ${user.gender==='Other'?'selected':''}>Other</option>
+    `;
+    document.getElementById('editPhoto').value = user.profilePhoto;
+  }
+
+  document.getElementById('profileForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    user.name = document.getElementById('editName').value;
+    user.email = document.getElementById('editEmail').value;
+    user.age = document.getElementById('editAge').value;
+    user.gender = document.getElementById('editGender').value;
+    user.profilePhoto = document.getElementById('editPhoto').value;
+    localStorage.setItem('sessionUser', JSON.stringify(user));
+    alert('Profile updated!');
+    document.getElementById('editProfile').style.display='none';
+    document.querySelector('#profile').style.display='block';
+    loadProfileDetails();
+  });
+
+  // --- Load quotes ---
+  function loadQuotes() {
+    const quotes = [
+      "The journey of a thousand miles begins with a single step.",
+      "Recovery is not a race. You don't have to feel guilty if it takes longer than you thought.",
+      "Your present circumstances don't determine where you can go; they merely determine where you start.",
+      "Psychological resilience is the mental reservoir of strength that enables us to cope with stress and hardship.",
+      "Small progress is still progress. Keep going!"
+    ];
+    const quote = quotes[Math.floor(Math.random() * quotes.length)];
+    document.getElementById('homeQuotes').innerText = quote;
+  }
+
+  function loadSupportQuotes() {
+    const supportQuotes = [
+      "Understanding your mind is the first step to healing.",
+      "Seeking help is a sign of strength.",
+      "Change your thoughts, and you change your world.",
+      "Psychological support can unlock your inner potential."
+    ];
+    const quote = supportQuotes[Math.floor(Math.random() * supportQuotes.length)];
+    document.getElementById('supportQuotes').innerText = quote;
+  }
+
+  function loadMotivationalQuotes() {
+    const motivationalQuotes = [
+      "Believe you can, and you're halfway there.",
+      "Motivation gets you going, but discipline keeps you growing.",
+      "Every day is a new beginning. Take a deep breath and start again.",
+      "Your only limit is your mind."
+    ];
+    const quote = motivationalQuotes[Math.floor(Math.random() * motivationalQuotes.length)];
+    document.getElementById('motivationalQuotes').innerText = quote;
+  }
+
+  // --- Tasks ---
+  function loadTask() {
+    const task = localStorage.getItem('dailyTask');
+    if(task) {
+      const t = JSON.parse(task);
+      document.getElementById('taskDisplay').innerText = `Addiction: ${t.addiction}, Date: ${t.startDate}, Frequency: ${t.frequency}`;
+    } else {
+      document.getElementById('taskDisplay').innerText = 'No task set.';
+    }
+  }
+
+  function showTaskForm() {
+    document.getElementById('taskFormContainer').style.display='block';
+  }
+
+  document.getElementById('taskForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const addiction = document.getElementById('taskAddiction').value;
+    const date = document.getElementById('taskDate').value;
+    const frequency = document.getElementById('taskFrequency').value;
+    localStorage.setItem('dailyTask', JSON.stringify({addiction, startDate: date, frequency}));
+    loadTask();
+    document.getElementById('taskFormContainer').style.display='none';
+  });
+
+  // --- Monthly Plan & Advice ---
+  const monthlyPlans = {
+    "Smoking": ["Stay busy with hobbies.", "Avoid triggers.", "Seek support groups."],
+    "Alcohol": ["Attend AA meetings.", "Distract yourself with activities.", "Stay connected with friends."],
+    "Gaming": ["Set time limits.", "Find alternative hobbies.", "Join support communities."]
+  };
+
+  function populateMonthlyPlan() {
+    const select = document.getElementById('monthlyPlanSelect');
+    select.innerHTML = '';
+    for(let addiction in monthlyPlans) {
+      const option = document.createElement('option');
+      option.value = addiction;
+      option.innerText = addiction;
+      select.appendChild(option);
+    }
+  }
+
+  function setTaskFromPlan() {
+    const selected = document.getElementById('monthlyPlanSelect').value;
+    if(selected && monthlyPlans[selected]) {
+      // set task with today's date
+      const today = new Date().toISOString().slice(0,10);
+      localStorage.setItem('dailyTask', JSON.stringify({addiction: selected, startDate: today, frequency: 1}));
+      loadTask();
+    }
+  }
+
+  // --- Advice based on addiction ---
+  function loadAdvice(addiction) {
+    const advices = {
+      "Smoking": ["Stay motivated, avoid cravings.", "Use nicotine patches."],
+      "Alcohol": ["Attend support groups.", "Stay away from triggers."],
+      "Gaming": ["Set strict time limits.", "Find alternative hobbies."]
+    };
+    const advice = advices[addiction] || ["Stay strong!", "Seek support!"];
+    document.getElementById('workflowContent').innerHTML = `<h3>Advice for ${addiction}</h3><ul>`+advice.map(a => `<li>${a}</li>`).join('')+`</ul>`;
+  }
+
+  // --- Weekly Progress Graph ---
+  let weeklyProgressData = JSON.parse(localStorage.getItem('weeklyProgress')) || {
+    weeks: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5'],
+    progress: [2, 4, 6, 8, 10]
+  };
+
+  let weeklyChart;
+  function loadWeeklyProgress() {
+    // Destroy previous if exists
+    if(weeklyChart) weeklyChart.destroy();
+    const ctx = document.getElementById('weeklyProgressChart').getContext('2d');
+    weeklyChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: weeklyProgressData.weeks,
+        datasets: [{
+          label: 'Addiction-Free Days',
+          data: weeklyProgressData.progress,
+          backgroundColor: 'rgba(76, 175, 80, 0.2)',
+          borderColor: 'rgba(76, 175, 80, 1)',
+          borderWidth: 3,
+          tension: 0.4,
+          fill: true,
+          pointBackgroundColor: 'white',
+          pointBorderColor: 'rgba(76, 175, 80, 1)',
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { beginAtZero:true, ticks: { color:'#555' } },
+          x: { ticks: { color:'#555' } }
+        }
+      }
+    });
+  }
+
+  function updateWeeklyProgress() {
+    // simulate weekly improvement
+    const last = weeklyProgressData.progress[weeklyProgressData.progress.length-1];
+    weeklyProgressData.progress.push(last + Math.floor(Math.random()*3));
+    weeklyProgressData.weeks.push(`Week ${weeklyProgressData.weeks.length+1}`);
+    if(weeklyProgressData.progress.length > 8) {
+      weeklyProgressData.progress.shift();
+      weeklyProgressData.weeks.shift();
+    }
+    localStorage.setItem('weeklyProgress', JSON.stringify(weeklyProgressData));
+    loadWeeklyProgress();
+  }
+
+  // auto-update weekly progress
+  setInterval(updateWeeklyProgress, 15000);
+
+  // --- Motivational thoughts ---
+  const motivationalThoughts = [
+    "Every day is a new beginning.",
+    "Believe in your ability to overcome.",
+    "Consistency is key to recovery.",
+    "Every small step counts.",
+    "Stay positive, stay strong."
+  ];
+
+  function loadMotivationalQuotes() {
+    const quote = motivationalThoughts[Math.floor(Math.random() * motivationalThoughts.length)];
+    document.getElementById('motivationalQuotes').innerText = quote;
+  }
+
+  // --- Rewards ---
+  let badges = JSON.parse(localStorage.getItem('badges')) || [];
+
+  function renderBadges() {
+    const container = document.getElementById('badgesContainer');
+    container.innerHTML = '';
+    badges.forEach(b => {
+      const div = document.createElement('div');
+      div.className='badge';
+      div.innerText=b;
+      container.appendChild(div);
+    });
+  }
+
+  function addBadge(badgeName) {
+    if(!badges.includes(badgeName)) {
+      badges.push(badgeName);
+      localStorage.setItem('badges', JSON.stringify(badges));
+      renderBadges();
+    }
+  }
+
+  // --- Savings ---
+  let savings = parseFloat(localStorage.getItem('savings')) || 0;
+
+  function loadSavings() {
+    document.getElementById('savingsDisplay').innerText=`Total Savings: ₹${savings.toFixed(2)} / $${(savings/75).toFixed(2)}`;
+  }
+
+  function addSavings() {
+    const amountINR = parseFloat(prompt('Enter amount in INR:', '1000'));
+    if(!isNaN(amountINR) && amountINR>0) {
+      savings+=amountINR;
+      localStorage.setItem('savings', savings);
+      loadSavings();
+    }
+  }
+
+  // --- Initialize ---
+  // Load profile
+  loadProfileDetails();
+  loadQuotes();
+  loadSupportQuotes();
+  loadMotivationalQuotes();
+  loadSavings();
+  loadTask();
+  loadBadges();
+  loadWeeklyProgress();
+
+</script>
+<!-- <button onclick="logout()">Logout</button>
+
+<script>//for logout which is logrd in in 130 line script
+  function logout() {
+    localStorage.removeItem('loggedIn');
+    window.location.href = 'login.html';
+  }
+</script> -->
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #FAF3E0; /* Warm White */
+    margin: 0;
+    padding: 20px;
+  }
+  .dashboard {
+    max-width: 600px;
+    margin: 50px auto;
+    background: #FFF8DC;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+  h2 {
+    color: #4CAF50;
+  }
+  button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #4CAF50; /* Green */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: #45a049;
+  }
+</style>
+</head>
+<body>
+
+<div class="dashboard">
+<h2>Welcome to the Dashboard</h2>
+<button onclick="logout()">Logout</button>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    if (localStorage.getItem('loggedIn') !== 'true') {
+      alert('Please log in first.');
+      window.location.href = 'login.html';
+    }
+  });
+  function logout() {
+    localStorage.removeItem('loggedIn');
+    window.location.href = 'login.html';
+  }
+</script>
+
+<style>
+  /* Styles for badges, quotes, etc. */
+  .badge {
+    display:inline-block; background:#4CAF50; color:#fff; padding:5px 10px; margin:5px; border-radius:8px;
+  }
+  .quote-section {
+    font-style: italic; margin-top:15px; color:#555;
+  }
+</style>
+<head>
+  <!-- ... other links ... -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+</body>
+</html>

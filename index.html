@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Addiction Awareness & Support App</title>
+<style>
+  /* Reset default styles */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Body with light warm white background */
+  body {
+    display: flex;
+    font-family: Arial, sans-serif;
+    background-color: #f8efd5; /* Warm white */
+    color: #333333;
+  }
+
+  /* Sidebar styles with green accents */
+  .sidebar {
+    height: 100vh;
+    width: 250px;
+    background-color: #235b26; /* Dark green */
+    padding-top: 20px;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar a {
+    padding: 15px 20px;
+    color: #fff8dc; /* Light yellowish text */
+    text-decoration: none;
+    margin-bottom: 10px;
+    font-weight: bold;
+    transition: background 0.3s;
+  }
+
+  .sidebar a:hover {
+    background-color: #3e9042; /* Light green hover */
+  }
+
+  /* Main content styles with softer colors */
+  .content {
+    margin-left: 250px;
+    padding: 30px;
+    max-width: 900px;
+  }
+
+  h1 {
+    color: #4d4813; /* Darker green for headings */
+  }
+
+  h2 {
+    color: #75570d; /* Bright yellow for sub-headings */
+    margin-top: 20px;
+  }
+
+  p {
+    line-height: 1.6;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 15px;
+    border-radius: 8px;
+    border: 2px solid #aed581; /* Light green border */
+  }
+
+  /* Gallery styling */
+  .gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+  }
+
+  .gallery img {
+    flex: 1 1 45%;
+    border: 2px solid #aed581; /* Light green border */
+    border-radius: 5px;
+  }
+
+  /* Buttons styled with warm yellow and green */
+  .btn {
+    padding: 12px 24px;
+    margin-top: 15px;
+    background-color: #ffd54f; /* Warm yellow */
+    color: #333;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .btn:hover {
+    background-color: #bcb63a; /* Lighter yellow on hover */
+  }
+
+  /* Sections spacing */
+  section {
+    margin-bottom: 40px;
+  }
+</style>
+</head>
+<body>
+
+<!-- Sidebar Navigation -->
+<div class="sidebar">
+  <a href="#home" onclick="navigateTo('home')">Home</a>
+  <a href="#addiction-management" onclick="navigateTo('addiction-management')">Addiction Management</a>
+  <a href="#psychological-support" onclick="navigateTo('psychological-support')">Psychological Support</a>
+  <a href="#app-features" onclick="navigateTo('app-features')">App Features</a>
+  <a href="#about-us" onclick="navigateTo('about-us')">About Us</a>
+  <a href="#get-started" onclick="navigateTo('get-started')">Get Started</a>
+</div>
+
+<!-- Main Content -->
+<div class="content" id="home">
+
+  <!-- Home / Introduction Section -->
+  <section id="home">
+    <h1>Welcome to the Addiction Awareness & Support </h1>
+    <p>
+       Addiction is a chronic brain disorder of reward, motivation, and memory, characterized by compulsive substance use or behavior despite harm. It combines behavioral tracking, emotional resilience, and therapeutic guidance to help individuals overcome addictive behaviors. It's managed through a combination of medical, psychological, and social support. Psychological support provides coping skills and addresses emotional factors, while educational support helps understand addiction and build relapse prevention strategies, with both being vital for recovery. 
+    </p>
+    <img src="https://newvistahealth.com/wp-content/uploads/2022/05/addictionphases.png" alt="Types of Addiction" />
+
+    <h2>What is Addiction?</h2>
+    <p>
+       It involves long-lasting changes in the brain's reward, stress, and self-control circuits, making it difficult to stop even when the individual wants to. Addiction can involve substances like drugs or alcohol (substance addiction) or behaviors such as gambling, gaming,social media(reels) or internet use (behavioral addiction).
+    </p>
+
+    <h2>Types of Addiction</h2>
+    <ul>
+      <li>Substance Addiction (Alcohol, Drugs, Nicotine,Tobacco)</li>
+      <li>Behavioral Addiction (Gambling, Gaming, Internet,Shopping)</li>
+      <li>Food Addiction</li>
+      <li>Relationship Dependency</li>
+    </ul>
+
+    <h2>Prevention & Cure</h2>
+    <p>
+      Prevention involves awareness, counseling, healthy habits, and psychological support. Treatment includes therapy, counseling, medication, and support groups.
+    </p>
+
+    <h2>Why Psychological Support?</h2>
+    <p>
+      Psychological support helps address the root causes of addiction, manages stress, and builds resilience—especially vital for students facing peer pressure and academic stress.
+    </p>
+
+    <h2>About this App</h2>
+    <p>
+      This app offers educational resources, management tools, counseling options, and community support to help you on your journey to recovery.
+    </p>
+    <!-- <button class="btn" onclick="alert('Create your account to get started!')">Get Started</button> -->
+  </section>
+
+  <!--Get Started-->
+  <section id="get-started">
+    <P>To start the journey on your addiction management journey click here</P>
+     <button class="btn" onclick="alert('Create your account to get started!')">Get Started</button>
+  </section>   
+  <!-- Addiction Management -->
+  <section id="addiction-management">
+    <h2>Addiction Management</h2>
+    <p>Learn about therapies, success stories, and effective strategies for managing addiction.</p>
+  </section>
+
+  <!-- Psychological Support -->
+  <section id="psychological-support">
+    <h2>Psychological Support</h2>
+    <p>Find resources and support groups to help you cope and recover from addiction.</p>
+  </section>
+
+  <!-- App Features -->
+  <section id="app-features">
+    <h2>App Features</h2>
+    <ul>
+      <li>Assess Addiction Patterns</li>
+      <li>Visualize Progress</li>
+      <li>Personalized Plans</li>
+      <li>Educational and Psychological Support</li>
+      <li>Motivational Support</li>
+      <li>Reinforce Positive Habits</li>
+    </ul>
+  </section>
+
+  <!-- About Us -->
+  <section id="about-us">
+    <h2>About Us</h2>
+    <p>Developed by Guiding Vision team. We aim to support individuals in overcoming addiction through education and psychological help.</p>
+  </section>
+
+ <!-- Create Account
+  <section id="create-account">
+    <h2>Create an Account</h2>
+    <p>Register to access personalized features and ongoing support.</p>
+    <button class="btn" onclick="alert('Account registration coming soon!')">Sigh</button>
+  </section> -->
+
+  <!-- Gallery of Related Images -->
+  <section>
+    <h2>Related Images & Resources</h2>
+    <div class="gallery">
+      <img src="https://patnaneuroandchildpsychiatry.in/wp-content/uploads/2024/05/de-addiction-types.jpg" alt="De-addiction Types" />
+      <img src="https://whitelightbh.com/wp-content/uploads/The-Benefits-of-Play-Therapy-for-Addiction-Treatment-1024x512.jpg" alt="Support" />
+      <img src="https://static.vecteezy.com/system/resources/previews/002/693/621/non_2x/rehabilitation-concept-icons-set-addiction-recovery-steps-addiction-treatment-methods-rehabilitation-types-idea-thin-line-color-illustrations-isolated-outline-drawings-editable-stroke-vector.jpg" alt="Therapy" />
+      <img src="https://d1y78cl34ykkmt.cloudfront.net/BlogImages/202051816489182.webp" alt="Counseling" />
+      <img src="https://olympicbehavioralhealth.com/wp-content/uploads/2024/07/What-are-the-Key-Types-of-Group-Therapy-1024x512.jpg" alt="Counseling" />
+    </div>
+  </section>
+</div>
+
+<!-- Inside your main page, replace this button: -->
+<a href="register.html" class="btn">Create an Account</a>
+
+<script>
+  // Navigation function for sidebar links
+  function navigateTo(sectionId) {
+    document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // You can add more interactivity here
+</script>
+</body>
+</html>
