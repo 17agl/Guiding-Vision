@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Addiction Awareness & Support App</title>
+<title>Addiction Management & Support App</title>
 <style>
   /* Reset default styles */
   * {
@@ -60,6 +60,10 @@
     margin-top: 20px;
   }
 
+  h3 {
+    color: #81651f; /* Bright yellow for sub-headings */
+    margin-top: 20px;
+  }
   p {
     line-height: 1.6;
   }
@@ -88,12 +92,12 @@
 
   /* Buttons styled with warm yellow and green */
   .btn {
-    padding: 12px 24px;
+    padding: 20px 100px;
     margin-top: 15px;
     background-color: #ffd54f; /* Warm yellow */
     color: #333;
     border: none;
-    border-radius: 6px;
+    border-radius: 12px;
     font-size: 16px;
     cursor: pointer;
     transition: background 0.3s;
@@ -119,6 +123,8 @@
   <a href="#app-features" onclick="navigateTo('app-features')">App Features</a>
   <a href="#about-us" onclick="navigateTo('about-us')">About Us</a>
   <a href="#get-started" onclick="navigateTo('get-started')">Get Started</a>
+  <a href="#create-an-account" onclick="navigateTo('create-an-account')">Create An Account</a>
+  <a href="#login" onclick="navigateTo('login')">Login</a>
 </div>
 
 <!-- Main Content -->
@@ -126,35 +132,32 @@
 
   <!-- Home / Introduction Section -->
   <section id="home">
-    <h1>Welcome to the Addiction Awareness & Support </h1>
+    <h1>Welcome to the Addiction Management & Support </h1>
     <p>
        Addiction is a chronic brain disorder of reward, motivation, and memory, characterized by compulsive substance use or behavior despite harm. It combines behavioral tracking, emotional resilience, and therapeutic guidance to help individuals overcome addictive behaviors. It's managed through a combination of medical, psychological, and social support. Psychological support provides coping skills and addresses emotional factors, while educational support helps understand addiction and build relapse prevention strategies, with both being vital for recovery. 
     </p>
     <img src="https://newvistahealth.com/wp-content/uploads/2022/05/addictionphases.png" alt="Types of Addiction" />
 
-    <h2>What is Addiction?</h2>
+    <h2>What is Addiction</h2>
     <p>
        It involves long-lasting changes in the brain's reward, stress, and self-control circuits, making it difficult to stop even when the individual wants to. Addiction can involve substances like drugs or alcohol (substance addiction) or behaviors such as gambling, gaming,social media(reels) or internet use (behavioral addiction).
     </p>
 
     <h2>Types of Addiction</h2>
     <ul>
-      <li>Substance Addiction (Alcohol, Drugs, Nicotine,Tobacco)</li>
-      <li>Behavioral Addiction (Gambling, Gaming, Internet,Shopping)</li>
-      <li>Food Addiction</li>
-      <li>Relationship Dependency</li>
+      <h3>Substance Addiction </h3>
+      <li>Alcohol</li>
+      <li>Drugs</li>
+      <li>Nicotine</li>
+      <li>Tobacco</li>
+      <h3>Behavioral Addiction</h3>
+      <li >Gambling</li>
+      <li>Gaming</li>
+      <li>Internet</li>
+      
     </ul>
 
-    <h2>Prevention & Cure</h2>
-    <p>
-      Prevention involves awareness, counseling, healthy habits, and psychological support. Treatment includes therapy, counseling, medication, and support groups.
-    </p>
-
-    <h2>Why Psychological Support?</h2>
-    <p>
-      Psychological support helps address the root causes of addiction, manages stress, and builds resilience—especially vital for students facing peer pressure and academic stress.
-    </p>
-
+  
     <h2>About this App</h2>
     <p>
       This app offers educational resources, management tools, counseling options, and community support to help you on your journey to recovery.
@@ -165,18 +168,25 @@
   <!--Get Started-->
   <section id="get-started">
     <P>To start the journey on your addiction management journey click here</P>
-     <button class="btn" onclick="alert('Create your account to get started!')">Get Started</button>
+     <button class="btn sticky-note" onclick="alert('Create your account to get started!')">Get Started</button>
   </section>   
   <!-- Addiction Management -->
   <section id="addiction-management">
     <h2>Addiction Management</h2>
-    <p>Learn about therapies, success stories, and effective strategies for managing addiction.</p>
+    <p>Addiction management involves identifying triggers, monitoring habits, and providing psychological support to overcome dependence on substances or behaviors. It includes counseling, cognitive behavioral therapy, healthy lifestyle changes, and family or peer support. Setting goals, tracking progress, and using motivational strategies like rewards help individuals build self-control, prevent relapse, and achieve long-term recovery for a healthier, balanced life.</p>
   </section>
-
+<!-- <section id="Create Account">
+    <P>Click here to create your account </P>
+     <button class="btn">Create an account </button>
+  </section>
+  <section id="login">
+    <P>If you have already create an account</P>
+     <button class="btn"  >Login</button>
+  </section> -->
   <!-- Psychological Support -->
   <section id="psychological-support">
     <h2>Psychological Support</h2>
-    <p>Find resources and support groups to help you cope and recover from addiction.</p>
+    <p>Psychological support plays a vital role in addiction management as it addresses the emotional, mental, and behavioral aspects of addiction. It helps individuals understand root causes, build healthy coping mechanisms, prevent relapse, and regain self-control. Counseling, therapy, and family support also reduce stress, guilt, and stigma, ensuring long-term recovery and a healthier lifestyle.</p>
   </section>
 
   <!-- App Features -->
@@ -199,28 +209,35 @@
   </section>
 
  <!-- Create Account
-  <section id="create-account">
+  <section id="create-an-account">
     <h2>Create an Account</h2>
     <p>Register to access personalized features and ongoing support.</p>
-    <button class="btn" onclick="alert('Account registration coming soon!')">Sigh</button>
-  </section> -->
+    <button class="btn" onclick="alert('Account registration coming soon!')"></button>
+  </section>  -->
 
-  <!-- Gallery of Related Images -->
+  <!-- Gallery of Related Images
+   Inside your Home / Introduction Section, replace the buttons with: -->
+
+<div style="margin-top: 20px;">
+  <section id="create-an-account">
+  <a href="register.html" class="btn sticky-note">Create an Account</a></section>
+  <section id="login">
+  <a href="login.html" class="btn sticky-note">Login</a></section>
+</div>
   <section>
     <h2>Related Images & Resources</h2>
     <div class="gallery">
-      <img src="https://patnaneuroandchildpsychiatry.in/wp-content/uploads/2024/05/de-addiction-types.jpg" alt="De-addiction Types" />
-      <img src="https://whitelightbh.com/wp-content/uploads/The-Benefits-of-Play-Therapy-for-Addiction-Treatment-1024x512.jpg" alt="Support" />
+      <img src="https://whitelightbh.com/wp-content/uploads/The-Benefits-of-Play-Therapy-for-Addiction-Treatment-1024x512.jpg" alt="De-addiction Types" />
+      <img src="https://sbdetox.com/wp-content/uploads/2023/02/Cognitive-Behavioral-Therapy-for-Addiction-1024x1024.png" alt="Support" />
       <img src="https://static.vecteezy.com/system/resources/previews/002/693/621/non_2x/rehabilitation-concept-icons-set-addiction-recovery-steps-addiction-treatment-methods-rehabilitation-types-idea-thin-line-color-illustrations-isolated-outline-drawings-editable-stroke-vector.jpg" alt="Therapy" />
-      <img src="https://d1y78cl34ykkmt.cloudfront.net/BlogImages/202051816489182.webp" alt="Counseling" />
-      <img src="https://olympicbehavioralhealth.com/wp-content/uploads/2024/07/What-are-the-Key-Types-of-Group-Therapy-1024x512.jpg" alt="Counseling" />
+      <img src="https://www.verywellmind.com/thmb/A8tGx8NlNh_T3_lQGR04NJyGnGc=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/overcoming-addiction-4157285.FINAL-f0a8efaed7a24b2a9a1a26dbbbf60435.png" alt="Counseling" />
     </div>
   </section>
 </div>
 
-<!-- Inside your main page, replace this button: -->
-<a href="register.html" class="btn">Create an Account</a>
-
+<!-- Inside your main page, replace this button:-->
+ <a href="register.html" class="btn"></a> 
+<!--
 <script>
   // Navigation function for sidebar links
   function navigateTo(sectionId) {
@@ -229,5 +246,93 @@
 
   // You can add more interactivity here
 </script>
+<!-- ihguihjviushvinckjshiuwhfkjsf -->
+<!-- <style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background-color: #fdfaf1; /* Warm white background */
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+  }
+
+  header {
+    text-align: center;
+    padding: 40px 20px;
+  }
+
+  h1 {
+    color: #33691e; /* Dark green */
+    font-size: 2.5em;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 1.2em;
+    color: #555;
+}-->
+<style>
+  /* Sticky note style for buttons */
+  .sticky-note {
+    display: inline-block;
+    margin: 10px;
+    padding: 12px 20px;
+    background-color: #f5df1b; /* Light yellow, like sticky note */
+    border: 2px solid #e2a406; /* Bright yellow border */
+    border-radius: 8px;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+    font-weight: bold;
+    font-family: 'Arial', sans-serif;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+  }
+
+  .sticky-note:hover {
+    transform: scale(1.05);
+    box-shadow: 4px 4px 12px rgba(0,0,0,0.3);
+  }
+
+  /* Container for buttons */
+  .button-container {
+    margin-top: 20px;
+  }
+</style>
+<!--
+<header>
+  <h1>Welcome to the Addiction Support App</h1>
+  <p>Your journey to recovery starts here.</p>
+  <div class="button-container">
+    <a href="register.html" class="sticky-note">Create an Account</a>
+    <a href="login.html" class="sticky-note">Login</a>
+  </div>
+</header>
+
+</body>
+</html> -->
+
+<!-- Inside your index.html, replace the "Create an Account" button with: -->
+<!-- Inside your index.html, replace the "Create an Account" button with: -->
+<!-- <a href="addiction_selection.html" class="sticky-note">Create an Account</a> -->
+<!-- index.html -->
+<!-- <header>
+  <h1>Welcome to the Addiction Support App</h1>
+  <p>Your journey to recovery starts here.</p>
+  <div class="button-container">
+    Change this line -->
+    <!-- <a href="addiction_selection.html" class="sticky-note">Create an Account</a>
+    <a href="login.html" class="sticky-note">Login</a>
+  </div>
+</header> -->
 </body>
 </html>
