@@ -111,3 +111,25 @@ p {
     font-size: 0.9rem;
   }
 }
+/* Add this to your existing <style> block */
+.sticky-note {
+  display: inline-block;
+  margin-right: 10px;
+  padding: 12px 20px;
+  background-color: #fff176; /* Light yellow, like sticky note */
+  border: 2px solid #fbc02d; /* Bright yellow border */
+  border-radius: 8px;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+  font-weight: bold;
+  font-family: 'Arial', sans-serif;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+}
+
+.sticky-note:hover {
+  transform: scale(1.05);
+  box-shadow: 4px 4px 12px rgba(0,0,0,0.3);
+}
