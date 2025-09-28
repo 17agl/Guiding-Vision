@@ -54,16 +54,17 @@
     display: inline-block;
     margin-top: 15px;
     padding: 8px 12px;
-    background-color: #FFC107; /* Yellow */
+    background-color: #deb70a; /* Yellow */
     color: #000;
     text-decoration: none;
     border-radius: 4px;
   }
   .nav-btn:hover {
-    background-color: #FFA000; /* Darker Yellow */
+    background-color: #d48c0f; /* Darker Yellow */
   }
 </style>
 </head>
+
 <body>
 
 <div class="container">
@@ -80,7 +81,8 @@
 <div id="loginMessage"></div>
 
 <!-- Return button to intro -->
-<a href="index.html" class="nav-btn">Back to Home</a>
+ <div style="text-align: center;">
+     <a href="index.html" class="btn">Back to Home</a></div>
 </div>
 
 <script>
@@ -107,5 +109,110 @@
     return false;
   }
 </script>
+<!-- irhbghbgnjknfj -->
+
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background-color: #fdfaf1; /* Warm white background */
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  .login-container {
+    background-color: #e0f2f1; /* Light greenish background for form */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    max-width: 400px;
+    width: 100%;
+  }
+
+  h2 {
+    color: #33691e; /* Dark green */
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+  }
+
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 2px solid #aed581; /* Light green border */
+    border-radius: 5px;
+    font-size: 16px;
+  }
+
+  button {
+    width: 100%;
+    padding: 12px;
+    background-color: #ffd54f; /* Warm yellow */
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  button:hover {
+    background-color: #ffe082;
+  }
+
+  /* Link back to home or register */
+  .back-link {
+    display: block;
+    margin-top: 15px;
+    text-align: center;
+    color: #33691e;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .back-link:hover {
+    text-decoration: underline;
+  }
+</style>
+</head>
+<!-- <body>
+
+<div class="login-container">
+  <h2>Login to Your Account</h2>
+  <form id="loginForm" onsubmit="return handleLogin(event)">
+    <label for="email">Email Address</label>
+    <input type="email" id="email" name="email" placeholder="you@example.com" required />
+
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" placeholder="Enter password" required />
+
+    <button type="submit">Login</button>
+  </form>
+  <a href="index.html" class="back-link">Back to Home</a>
+</div>
+
+<script>
+  function handleLogin(event) {
+    event.preventDefault();
+    const email = document.getElementById('email').value;
+    alert(`Logged in with email: ${email}`);
+    window.location.href = 'index.html';
+    return false;
+  }
+</script>  -->
+
 </body>
 </html>
