@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Addiction Details</title>
+<style>
+  body {
+    background-color: #fff8e1; /* Warm white light background */
+    font-family: Arial, sans-serif;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  h1 {
+    color: #33691e; /* Greenish dark */
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    color: #555;
+  }
+
+  /* Container for dynamic forms */
+  .form-container {
+    width: 100%;
+    max-width: 900px;
+  }
+
+  .addiction-form {
+    background-color: #dcedc8; /* Light green background */
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+
+  .addiction-form h2 {
+    margin-bottom: 15px;
+    color: #33691e;
+  }
+
+  label {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 4px;
+    font-weight: bold;
+  }
+
+  input, select {
+    width: 100%;
+    padding: 8px;
+    border: 2px solid #aed581;
+    border-radius: 4px;
+    font-size: 1em;
+  }
+
+  /* Buttons */
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+
+  button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .add-btn {
+    background-color: #ffd54f; /* Warm yellow */
+  }
+
+  .add-btn:hover {
+    background-color: #ffe082;
+  }
+
+  .next-btn {
+    background-color: #aed581; /* Light green */
+  }
+
+  .next-btn:hover {
+    background-color: #9ccc65;
+  }
+
+  /* List of added addictions */
+  .added-list {
+    margin-top: 20px;
+  }
+
+  .added-item {
+    background-color: #c8e6c9; /* Light greenish */
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
+  }
+</style>
+</head>
+<body>
+
+<h1>Provide Details for Your Addictions</h1>
+<p>Select addiction from the list below and specify details.</p>
+
+<div class="form-container" id="forms-container">
+   <!-- Dynamic forms will be added here  -->
+</div>
+
+<div class="buttons">
+  <button class="add-btn" onclick="addAddictionForm()">Add Addiction</button>
+  <button class="next-btn" onclick="proceed()">Proceed</button>
+</div>
+<a href="addiction_selection.html" class="btn"></a>
+<script>
+  // Retrieve selected addictions from local storage
+  let selectedAddictions = JSON.parse(localStorage.getItem('addictions')) || [];
+  let addedAddictions = [];
+//   setTimeout(() => {
+//       window.location.href = 'login.html';
+//     }, 1500);
+
+  // Function to add a form for each addiction
+  function addAddictionForm() {
+    const container = document.getElementById('forms-container');
+
+    // Loop through selectedAddictions and avoid duplicates
+    selectedAddictions.forEach(addiction => {
+      if (!addedAddictions.includes(addiction)) {
+        // Create form
+        const formDiv = document.createElement('div');
+        formDiv.className = 'addiction-form';
+
+        formDiv.innerHTML = `
+          <h2>${addiction}</h2>
+          <label for="time-${addiction}">Consumption Time (e.g., 8:00 PM)</label>
+          <input type="text" id="time-${addiction}" placeholder="e.g., 8:00 PM" />
+
+          <label for="day-${addiction}">Day of Week / Date</label>
+          <input type="text" id="day-${addiction}" placeholder="e.g., Monday or 2024-05-01" />
+
+          <label for="duration-${addiction}">Duration Suffered (e.g., 2 years, 6 months)</label>
+          <input type="text" id="duration-${addiction}" placeholder="e.g., 2 years" />
+        `;
+
+        container.appendChild(formDiv);
+        addedAddictions.push(addiction);
+        setTimeout(() => {
+     window.location.href = 'login.html';
+     }, 150000);
+
+      }
+    });
+  }
+
+  // Load existing forms if any
+  window.onload = () => {
+    addAddictionForm();
+  };
+
+  function proceed() {
+    const detailsData = {};
+    selectedAddictions.forEach(addiction => {
+      const time = document.getElementById(`time-${addiction}`).value.trim();
+      const day = document.getElementById(`day-${addiction}`).value.trim();
+      const duration = document.getElementById(`duration-${addiction}`).value.trim();
+
+      detailsData[addiction] = {
+        time: time,
+        day: day,
+        duration: duration
+      };
+    });
+
+    // Save details to local storage
+    localStorage.setItem('addictionDetails', JSON.stringify(detailsData));
+
+    alert('Your addiction details have been saved. You can now proceed to login.');
+
+    // Redirect to login or main page
+    window.location.href = 'login.html';
+  }
+</script>
+
+</body>
+</html>

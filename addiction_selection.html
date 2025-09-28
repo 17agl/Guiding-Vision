@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Select Addiction Types</title>
+<style>
+  body {
+    background-color: #fff8e1; /* Warm white light background */
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 30px;
+  }
+
+  h1 {
+    color: #33691e; /* Greenish dark */
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    color: #555;
+  }
+
+  .cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+    max-width: 900px;
+  }
+
+  .card {
+    background-color: #dcedc8; /* Light green for cards */
+    border: 2px solid #aed581; /* Green border */
+    border-radius: 10px;
+    width: 180px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1em;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .card:hover {
+    transform: scale(1.05);
+    box-shadow: 2px 2px 12px rgba(0,0,0,0.3);
+  }
+
+  /* Buttons style */
+  .next-btn {
+    margin-top: 30px;
+    padding: 12px 24px;
+    background-color: #ffd54f; /* Warm yellow */
+    border: none;
+    border-radius: 6px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .next-btn:hover {
+    background-color: #ffe082;
+  }
+</style>
+</head>
+<body>
+
+<h1>Select Your Addiction Types</h1>
+<p>Please select the addictions you want to manage or recover from:</p>
+
+<div class="cards-container">
+  <div class="card" data-type="Social Media">Social Media</div>
+  <div class="card" data-type="Gaming">Gaming</div>
+  <div class="card" data-type="Alcohol">Alcohol</div>
+  <div class="card" data-type="Smoking">Smoking</div>
+  <div class="card" data-type="Gambling">Gambling</div>
+  <div class="card" data-type="Drugs">Drugs</div>
+</div>
+
+<button class="next-btn" onclick="proceed()">Next</button>
+
+<script>
+  let selectedAddictions = [];
+
+  // Toggle selection on cards
+  document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('click', () => {
+      const type = card.getAttribute('data-type');
+      if (selectedAddictions.includes(type)) {
+        selectedAddictions = selectedAddictions.filter(t => t !== type);
+        card.style.borderColor = '#aed581'; // Reset border color
+        card.style.backgroundColor = '#dcedc8'; // Reset background
+        // setTimeout(() => {
+        // window.location.href = 'addiction.html';
+    // }, 1500);
+      } else {
+        selectedAddictions.push(type);
+        card.style.borderColor = '#fbc02d'; // Highlight border
+        card.style.backgroundColor = '#fff59d'; // Slightly different yellow
+        setTimeout(() =>{
+        window.location.href = 'addiction.html';
+        },2000);
+      }
+    //   setTimeout(() => {
+    //   window.location.href = 'addiction.html';
+    // }, 1500);
+    //   window.location.href = 'addiction.html';
+    });
+  });
+
+  function proceed() {
+    if (selectedAddictions.length === 0) {
+      alert('Please select at least one addiction type.');
+      return;
+    }
+    // Save selections, e.g., in local storage
+    localStorage.setItem('addictions', JSON.stringify(selectedAddictions));
+    // Proceed to login or main page
+    window.location.href = 'login.html';
+  }
+</script>
+
+</body>
+</html>
