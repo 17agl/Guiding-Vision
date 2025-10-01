@@ -30,8 +30,8 @@
 
 <main id="main-content" style="padding:20px; max-width:1200px; margin:auto;">
 
-<!-- Home / Welcome message -->
-<div id="home" class="section">
+<!--Home / Welcome message -->
+ <div id="home" class="section">
   <h2>Welcome to Addiction Management System</h2>
   <p>Navigate through the sections to manage your journey towards recovery.</p>
   <div class="quote-section" id="homeQuotes"></div>
@@ -48,16 +48,16 @@
 <div id="tasks" class="section" style="display:none;">
   <h2>Today's Tasks</h2>
   <div id="taskDisplay"></div>
-  <button class="btn btn-secondary" onclick="showTaskForm()">Add/Edit Tasks</button>
-  <div id="taskFormContainer" style="display:none;">
+  <button class="btn btn-secondary" onclick="showTaskForm()">Task Form</button>
+  <div id="taskFormContainer" style="display:none;"></div>
+
 <!-- hjskhfjkshivhkvnskhvoighvjnvkjshfasnvlioewhfv  -->
-  <div class="container">
+  <!-- <div class="container">
     <h2>My Checklist</h2>
     <input type="text" id="taskInput" placeholder="Write something...">
     <button onclick="addTask()">Add</button>
     <ul id="checklist"></ul>
-  </div>
-
+  </div><div>
   <script>
     function addTask() {
       let input = document.getElementById("taskInput");
@@ -80,8 +80,8 @@
 
         document.getElementById("checklist").appendChild(li);
 
-        // clear input
-        input.value = "";
+        // clear input -->
+        <!-- input.value = "";
       }
     }
   </script>
@@ -91,7 +91,7 @@
     <select id="monthlyPlanSelect"></select>
     <button class="btn btn-primary" onclick="setTaskFromPlan()">Set Task</button>
   </div>
-</div>
+</div> -->
 
 <!-- Workflow & Advice -->
 <div id="workflow" class="section" style="display:none;">
@@ -267,29 +267,29 @@
   }
 
   // --- Tasks ---
-  function loadTask() {
-    const task = localStorage.getItem('dailyTask');
-    if(task) {
-      const t = JSON.parse(task);
-      document.getElementById('taskDisplay').innerText = `Addiction: ${t.addiction}, Date: ${t.startDate}, Frequency: ${t.frequency}`;
-    } else {
-      document.getElementById('taskDisplay').innerText = 'No task set.';
-    }
-  }
+  // function loadTask() {
+  //   const task = localStorage.getItem('dailyTask');
+  //   if(task) {
+  //     const t = JSON.parse(task);
+  //     document.getElementById('taskDisplay').innerText = `Addiction: ${t.addiction}, Date: ${t.startDate}, Frequency: ${t.frequency}`;
+  //   } else {
+  //     document.getElementById('taskDisplay').innerText = 'No task set.';
+  //   }
+  // }
 
-  function showTaskForm() {
-    document.getElementById('taskFormContainer').style.display='block';
-  }
+  // function showTaskForm() {
+  //   document.getElementById('taskFormContainer').style.display='block';
+  // }
 
-  document.getElementById('taskForm').addEventListener('submit', function(e){
-    e.preventDefault();
-    const addiction = document.getElementById('taskAddiction').value;
-    const date = document.getElementById('taskDate').value;
-    const frequency = document.getElementById('taskFrequency').value;
-    localStorage.setItem('dailyTask', JSON.stringify({addiction, startDate: date, frequency}));
-    loadTask();
-    document.getElementById('taskFormContainer').style.display='none';
-  });
+  // document.getElementById('taskForm').addEventListener('submit', function(e){
+  //   e.preventDefault();
+  //   const addiction = document.getElementById('taskAddiction').value;
+  //   const date = document.getElementById('taskDate').value;
+  //   const frequency = document.getElementById('taskFrequency').value;
+  //   localStorage.setItem('dailyTask', JSON.stringify({addiction, startDate: date, frequency}));
+  //   loadTask();
+  //   document.getElementById('taskFormContainer').style.display='none';
+  // });
 
   // --- Monthly Plan & Advice ---
   const monthlyPlans = {
@@ -519,7 +519,7 @@
     font-style: italic; margin-top:15px; color:#555;
   }
 </style>
-<head>
+ <head>
   <!-- ... other links ... -->
   <link rel="stylesheet" href="styles.css" />
 </head>
