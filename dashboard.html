@@ -10,6 +10,10 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <!-- Styles -->
 <link rel="stylesheet" href="styles.css" />
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
 </head>
 <body>
 
@@ -30,8 +34,9 @@
 
 <main id="main-content" style="padding:20px; max-width:1200px; margin:auto;">
 
+
 <!--Home / Welcome message -->
- <div id="home" class="section">
+ <div id="home" class="section" style ="display:block">
   <h2>Welcome to Addiction Management System</h2>
   <p>Navigate through the sections to manage your journey towards recovery.</p>
   <div class="quote-section" id="homeQuotes"></div>
@@ -42,75 +47,869 @@
   <h2>User Profile</h2>
   <div id="profileDetails"></div>
   <button class="btn btn-secondary" onclick="editProfile()">Edit Profile</button>
-</div>
+</div> 
 
 <!-- Today's Tasks -->
+<!-- Today's Tasks -->
+ <!-- <h2>Today's Tasks</h2> -->
 <div id="tasks" class="section" style="display:none;">
   <h2>Today's Tasks</h2>
-  <div id="taskDisplay"></div>
-  <button class="btn btn-secondary" onclick="showTaskForm()">Task Form</button>
-  <div id="taskFormContainer" style="display:none;"></div>
+  
+  <!-- Start of integrated Goal Checklist -->
+  <style>
+    /* Paste your goal-checklist styles here */
+    body {
+      background-color: #fff8e1; /* Warm white */
+      font-family: 'Arial Rounded MT Bold', Arial, sans-serif;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
 
-<!-- hjskhfjkshivhkvnskhvoighvjnvkjshfasnvlioewhfv  -->
-  <!-- <div class="container">
-    <h2>My Checklist</h2>
-    <input type="text" id="taskInput" placeholder="Write something...">
-    <button onclick="addTask()">Add</button>
-    <ul id="checklist"></ul>
-  </div><div>
+    h1 {
+      color: #33691e;
+      margin-bottom: 10px;
+      font-size: 2em;
+      text-align: center;
+    }
+
+    /* Attractive header */
+    .subheading {
+      color: #558b2f;
+      font-size: 1.2em;
+      margin-bottom: 30px;
+      text-align: center;
+      max-width: 800px;
+    }
+
+    /* Form to add goals */
+    .goal-form {
+      background-color: #dcedc8;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 750px;
+      margin-bottom: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .goal-form h2 {
+      margin-top: 0;
+      color: #33691e;
+      text-align: center;
+    }
+
+    /* Input groups */
+    .input-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      font-weight: bold;
+      margin-bottom: 5px;
+      font-size: 1em;
+    }
+
+    input, select {
+      padding: 10px;
+      border-radius: 8px;
+      border: 2px solid #aed581;
+      font-size: 1em;
+    }
+
+    /* Add button */
+    .add-goal-btn {
+      background-color: #ffd54f;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .add-goal-btn:hover {
+      background-color: #ffe082;
+    }
+
+    /* Checklist area */
+    .checklist-area {
+      width: 100%;
+      max-width: 800px;
+      padding: 20px;
+      background: linear-gradient(135deg, #f0f4c3, #c8e6c9);
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      margin-bottom: 50px;
+    }
+
+    .checklist-header {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #33691e;
+    }
+
+    /* Goal list */
+    .goal-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    /* Each goal item styled attractively */
+    .goal-item {
+      display: flex;
+      align-items: center;
+      background-color: #ffffffcc; /* semi-transparent white */
+      padding: 12px 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .goal-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    input[type="checkbox"] {
+      transform: scale(1.3);
+      margin-right: 20px;
+    }
+
+    .goal-text {
+      font-size: 1.1em;
+      flex: 1;
+      word-wrap: break-word;
+    }
+
+    /* Buttons */
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    button {
+      padding: 14px 24px;
+      font-size: 1em;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .save-btn {
+      background-color: #aed581;
+    }
+
+    .save-btn:hover {
+      background-color: #9ccc65;
+    }
+
+    .clear-btn {
+      background-color: #ef5350;
+      color: #fff;
+    }
+
+    .clear-btn:hover {
+      background-color: #e57373;
+    }
+  </style>
+
+  <div>
+    <h1>Set Your Goals to Overcome Addiction</h1>
+    <div class="subheading">
+      Enter your goals, set durations, and tick them off as you complete them. Keep motivated!
+    </div>
+
+    <!-- Form to add new goal -->
+    <div class="goal-form">
+      <h2>Add a New Goal</h2>
+      <div class="input-group">
+        <label for="goal-input">Goal Description:</label>
+        <input type="text" id="goal-input" placeholder="e.g., Meditate daily" />
+      </div>
+      <div class="input-group">
+        <label for="duration-select">Duration:</label>
+        <select id="duration-select">
+          <option value="1 Day">1 Day</option>
+          <option value="1 Week">1 Week</option>
+          <option value="21 Days">21 Days</option>
+          <option value="1 Month">1 Month</option>
+        </select>
+      </div>
+      <button class="add-goal-btn" onclick="addGoal()">Add Goal</button>
+    </div>
+
+    <!-- Checklist of goals -->
+    <div class="checklist-area">
+      <div class="checklist-header"><h2>Your Goals Checklist</h2></div>
+      <div class="goal-list" id="goal-list">
+        <!-- Goals will be dynamically added here -->
+      </div>
+    </div>
+
+    <!-- Action buttons -->
+    <div class="buttons">
+      <button class="save-btn" onclick="saveGoals()">Save Goals</button>
+      <button class="clear-btn" onclick="clearGoals()">Clear All</button>
+    </div>
+  </div>
+
   <script>
-    function addTask() {
-      let input = document.getElementById("taskInput");
-      let taskText = input.value.trim();
+    let goals = JSON.parse(localStorage.getItem('goals')) || [];
 
-      if (taskText !== "") {
-        // create list item
-        let li = document.createElement("li");
+    function addGoal() {
+      const goalInput = document.getElementById('goal-input');
+      const durationSelect = document.getElementById('duration-select');
+      const goalText = goalInput.value.trim();
 
-        // create checkbox
-        let checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
+      if (goalText === "") {
+        alert('Please enter a goal description.');
+        return;
+      }
 
-        // create text
-        let textNode = document.createTextNode(" " + taskText);
+      goals.push({ text: goalText, duration: durationSelect.value });
+      localStorage.setItem('goals', JSON.stringify(goals));
+      goalInput.value = '';
+      renderGoals();
+    }
 
-        // append to li
-        li.appendChild(checkbox);
-        li.appendChild(textNode);
+    function renderGoals() {
+      const container = document.getElementById('goal-list');
+      container.innerHTML = '';
 
-        document.getElementById("checklist").appendChild(li);
+      goals.forEach((goal, index) => {
+        const goalDiv = document.createElement('div');
+        goalDiv.className = 'goal-item';
 
-        // clear input -->
-        <!-- input.value = "";
+        goalDiv.innerHTML = `
+          <input type="checkbox" id="goal-${index}" />
+          <label for="goal-${index}" class="goal-text">
+            ${goal.text} (${goal.duration})
+          </label>
+        `;
+        container.appendChild(goalDiv);
+      });
+    }
+
+    function saveGoals() {
+      alert('Your goals are saved. Keep checking them off!');
+    }
+
+    function clearGoals() {
+      if (confirm('Are you sure you want to clear all goals?')) {
+        goals = [];
+        localStorage.removeItem('goals');
+        renderGoals();
       }
     }
+
+    window.onload = () => {
+      renderGoals();
+    };
   </script>
-  </div>
-  <div>
-    <h4>Set from your Monthly Plan</h4>
-    <select id="monthlyPlanSelect"></select>
-    <button class="btn btn-primary" onclick="setTaskFromPlan()">Set Task</button>
-  </div>
-</div> -->
+</div>
+<!-- End of integrated goal checklist -->
+</div>
+
+
+
+
+
+
+
 
 <!-- Workflow & Advice -->
-<div id="workflow" class="section" style="display:none;">
-  <h2>Workflow & Advice</h2>
-  <div id="workflowContent"></div>
-</div>
 
-<!-- Psychological Support -->
-<div id="support" class="section" style="display:none;">
-  <h2>Psychological Support</h2>
-  <div id="supportQuotes"></div>
-  <p>Access resources, chat, and support groups here.</p>
+
+
+
+
+<!-- Support Heading Page -->
+<!-- Support & Resources Section -->
+ <!-- <h2 style="text-align:center; color:#33691e; margin-bottom:20px;">You're Not Alone — Support & Resources</h2> -->
+<div id="support" class="section" style=" display:none;padding:40px; max-width:1000px; margin:auto; background:#f0f4f8; border-radius:15px; font-family: Arial, sans-serif;">
+  <h2 style="text-align:center; color:#33691e; margin-bottom:20px;">You're Not Alone — Support & Resources</h2>
+  
+  <!-- Encourage Connection -->
+  <div class="support-section" style="display:none;margin-bottom:30px;">
+    <h3 style="color:#558b2f;">Encourage Connection</h3>
+    <p style="font-size:1.1em;">Reach out to trusted friends, family, mentors, or professionals like your GP or counselor. Sharing your feelings can be very healing.</p>
+    <div class="support-methods" style="display:flex; flex-wrap:wrap; gap:15px; margin-top:15px;">
+      <button class="support-btn" onclick="alert('Call your local helpline or mental health professional.')">Call Support Line</button>
+      <button class="support-btn" onclick="alert('Send a message or chat with a trusted friend or family member.')">Chat with Support</button>
+      <button class="support-btn" onclick="alert('Schedule an appointment with a mental health professional.')">Book Appointment</button>
+    </div>
+  </div>
+  
+  <!-- Signpost to Resources -->
+  <div class="support-section" style="margin-bottom:30px;">
+    <h3 style="color:#558b2f;">Signpost to Resources</h3>
+    <p style="font-size:1.1em;">Find practical information and professional support services to help you on your journey.</p>
+    <ul style="list-style-type:none; padding:0; margin-top:15px;">
+      <li style="margin-bottom:10px;">
+        <button class="support-resource-btn" onclick="window.open('https://www.who.int/health-topics/mental-health', '_blank')">World Health Organization - Mental Health</button>
+      </li>
+      <li style="margin-bottom:10px;">
+        <button class="support-resource-btn" onclick="window.open('https://www.samhsa.gov/find-help/national-helpline', '_blank')">SAMHSA Helpline</button>
+      </li>
+      <li style="margin-bottom:10px;">
+        <button class="support-resource-btn" onclick="window.open('https://www.befrienders.org/', '_blank')">Befrienders Worldwide</button>
+      </li>
+    </ul>
+  </div>
+  
+  <!-- Focus on Physical & Mental Wellbeing -->
+  <div class="support-section" style="margin-bottom:30px;">
+    <h3 style="color:#558b2f;">Focus on Wellbeing</h3>
+    <p style="font-size:1.1em;">Engage in activities that boost your mental health:</p>
+    <ul style="margin-top:15px; padding-left:20px;">
+      <li>Exercise regularly — go for a walk or join a class</li>
+      <li>Practice mindfulness and meditation</li>
+      <li>Ensure proper sleep routines</li>
+      <li>Spend time in nature or outdoors</li>
+    </ul>
+  </div>
+  
+  <!-- Validate Feelings -->
+  <div class="support-section">
+    <h3 style="color:#558b2f;">Validate Your Feelings</h3>
+    <p style="font-size:1.1em;">Remember, your feelings are valid. You're not alone in this. It's okay to seek help and take things one step at a time. Be kind to yourself.</p>
+  </div>
 </div>
+<style>
+  /* Support section styles for consistency */
+  #supportSection {
+    padding: 40px;
+    max-width: 1000px;
+    margin: auto;
+    background: #f0f4f8;
+    border-radius: 15px;
+    font-family: Arial, sans-serif;
+  }
+  #supportSection h2 {
+    text-align: center;
+    color: #33691e;
+    margin-bottom: 20px;
+  }
+  .support-section {
+    margin-bottom: 30px;
+  }
+  .support-section h3 {
+    color: #558b2f;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+  .support-section p {
+    font-size: 1.1em;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  /* Buttons styles */
+  .support-btn, .support-resource-btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #4dd0e1;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+  .support-btn:hover {
+    background-color: #26c6da;
+  }
+  .support-resource-btn {
+    background-color: #81d4fa;
+  }
+  .support-resource-btn:hover {
+    background-color: #4fc3f7;
+  }
+  ul {
+    list-style-type: disc;
+    padding-left: 20px;
+  }
+  li {
+    margin-bottom: 8px;
+  }
+</style>
+
+
+
+
+
+
+
 
 <!-- Progress Graph -->
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f0f2f5;
+    margin: 0;
+    padding: 20px;
+  }
+  h2 {
+    text-align: center;
+    color: #4CAF50;
+    margin-bottom: 10px;
+  }
+  .buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  button {
+    background: linear-gradient(135deg, #4CAF50, #81C784);
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #fff;
+    transition: background 0.3s, transform 0.2s;
+  }
+  button:hover {
+    background: linear-gradient(135deg, #388E3C, #66BB6A);
+    transform: scale(1.05);
+  }
+  .section {
+    max-width: 1200px;
+    margin: 30px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    display: none;
+  }
+  /* Card styling for charts and lists */
+  .card {
+    background: #fafafa;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+  }
+  h3 {
+    margin-top: 0;
+    color: #333;
+  }
+  h4 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #555;
+  }
+  ul {
+    padding-left: 20px;
+  }
+  li {
+    padding: 8px 12px;
+    margin: 4px 0;
+    border-radius: 6px;
+    background: #e3f2fd;
+  }
+  li.fail {
+    background: #ffe0e0;
+  }
+  canvas {
+    width: 100% !important;
+    height: auto !important;
+  }
+</style>
+<body>
+
 <div id="progress" class="section" style="display:none;">
-  <h2>Weekly Progress</h2>
-  <canvas id="weeklyProgressChart" height="300"></canvas>
+<h2 style="text-align:center;">Progress Report Dashboard</h2>
+<div class="buttons">
+  <button onclick="showProgressPart('today')">Today's Progress</button>
+  <button onclick="showProgressPart('weekly')">Weekly Progress</button>
+  <button onclick="showProgressPart('monthly')">Monthly Progress</button>
+  <button onclick="showProgressPart('yearly')">Yearly Progress</button>
 </div>
+
+<!-- Sections for each report -->
+<div id="progress-today" class="progress-section"></div>
+<div id="progress-weekly" class="progress-section"></div>
+<div id="progress-monthly" class="progress-section"></div>
+<div id="progress-yearly" class="progress-section"></div>
+</div>
+<script>
+  // Store chart instances globally for updating/destroying
+  let todayDoughnut, todayBar, weeklyBar, weeklyPie, weeklyPie2, yearlyRadar, badgesBar, gitTrendLine, monthlyScatter;
+
+  // User Data
+  const userProgressData = {
+    today: {
+      tasksCompleted: 3,
+      totalTasks: 5,
+      date: new Date().toLocaleDateString(),
+      recentActivities: ['Updated README', 'Fixed bug #234', 'Completed feature X'],
+      streakDays: 5,
+    },
+    weekly: {
+      goals: ['Finish module A', 'Code review', 'Update documentation'],
+      challenges: ['Time management', 'Bug fixes'],
+      failures: ['Test case failures', 'Build errors'],
+      keyAchievements: ['Completed 3 features', 'Resolved critical bugs'],
+    },
+    monthly: {
+      milestones: ['Milestone 1 achieved', 'Design phase completed', 'Deployment prep'],
+      upcomingMilestones: ['User testing', 'Final review'],
+      badges: ['Code Master', 'Bug Squasher'],
+      medals: ['Top Coder of the Month'],
+      achievements: ['Completed 15 features', 'Resolved 50 bugs'],
+      streaks: [3, 5, 7], // streaks over months
+      performance: [], // for scatter plot
+    },
+    yearly: {
+      skillProgress: {
+        'JavaScript': 85,
+        'React': 78,
+        'Node.js': 70,
+        'CSS': 88,
+        'HTML': 92,
+        'Python': 75,
+        'Django': 65,
+        'GraphQL': 55,
+      },
+      badgesEarned: ['Code Master', 'Bug Hunter', 'UI Designer'],
+      medals: ['Annual Top Performer'],
+      totalCommits: 1200,
+      totalFeatures: 50,
+      totalBugsFixed: 300,
+      gitHistoryTrend: [50, 75, 60, 80, 90, 70, 85],
+    }
+  };
+
+  // Utility: Clear sections
+  function hideAllSections() {
+    document.querySelectorAll('.section').forEach(d => d.style.display='none');
+  }
+
+  // Show selected report
+  function showProgressPart(part) {
+    hideAllSections();
+    document.getElementById(`progress-${part}`).style.display='block';
+
+    if (part==='today') renderTodayProgress();
+    if (part==='weekly') renderWeeklyProgress();
+    if (part==='monthly') renderMonthlyProgress();
+    if (part==='yearly') renderYearlyProgress();
+  }
+
+  // --- Today's Progress ---
+function renderTodayProgress() {
+  const container = document.getElementById('progress-today');
+  container.innerHTML = `
+    <div class="card">
+      <h3 style="text-align:center;">Today's Progress</h3>
+      <canvas id="todayDoughnut"></canvas>
+      <canvas id="todayBar" style="margin-top:20px;"></canvas>
+      <h4 style="margin-top:20px;">Recent Activities:</h4>
+      <ul id="todayActivities"></ul>
+      <p><strong>Streak:</strong> ${userProgressData.today.streakDays} days</p>
+    </div>
+  `;
+
+  // Doughnut Chart
+  const ctxDoughnut = document.getElementById('todayDoughnut').getContext('2d');
+  if (todayDoughnut) todayDoughnut.destroy();
+  todayDoughnut = new Chart(ctxDoughnut, {
+    type: 'doughnut',
+    data: {
+      labels: ['Completed Tasks', 'Remaining Tasks'],
+      datasets: [{
+        data: [userProgressData.today.tasksCompleted, userProgressData.today.totalTasks - userProgressData.today.tasksCompleted],
+        backgroundColor: ['#4CAF50', '#FFC107']
+      }]
+    },
+    options: { responsive:true, plugins: { legend: { position: 'bottom' } } }
+  });
+
+  // Bar Chart
+  const ctxBar = document.getElementById('todayBar').getContext('2d');
+  if (todayBar) todayBar.destroy();
+  todayBar = new Chart(ctxBar, {
+    type: 'bar',
+    data: {
+      labels: ['Activities'],
+      datasets: [{
+        label: 'Activities Count',
+        data: [userProgressData.today.recentActivities.length],
+        backgroundColor: ['#2196F3']
+      }]
+    },
+    options: { responsive:true, scales: { y: { beginAtZero:true, ticks: { stepSize:1 } } } }
+  });
+
+  // Activities list
+  const list = document.getElementById('todayActivities');
+  list.innerHTML = '';
+  userProgressData.today.recentActivities.forEach(act => {
+    const li = document.createElement('li');
+    li.innerText = act;
+    list.appendChild(li);
+  });
+}
+
+ // --- Weekly Progress ---
+function renderWeeklyProgress() {
+  const container = document.getElementById('progress-weekly');
+  container.innerHTML = `
+    <div class="card">
+      <h3 style="text-align:center;">Weekly Progress (Kanban / Highlight / Narrative)</h3>
+      <h4>Goals:</h4>
+      <ul id="weeklyGoals"></ul>
+      <h4>Challenges:</h4>
+      <ul id="weeklyChallenges"></ul>
+      <h4>Failures:</h4>
+      <ul id="weeklyFailures"></ul>
+      <h4>Achievements:</h4>
+      <ul id="weeklyAchievements"></ul>
+      <canvas id="weeklyBar"></canvas>
+      <canvas id="weeklyPie" style="margin-top:20px;"></canvas>
+    </div>
+  `;
+
+  // Goals
+  const gList = document.getElementById('weeklyGoals');
+  gList.innerHTML = '';
+  userProgressData.weekly.goals.forEach(g => {
+    const li = document.createElement('li');
+    li.innerText = g;
+    gList.appendChild(li);
+  });
+  // Challenges
+  const cList = document.getElementById('weeklyChallenges');
+  cList.innerHTML = '';
+  userProgressData.weekly.challenges.forEach(c => {
+    const li = document.createElement('li');
+    li.innerText = c;
+    cList.appendChild(li);
+  });
+  // Failures
+  const fList = document.getElementById('weeklyFailures');
+  fList.innerHTML = '';
+  userProgressData.weekly.failures.forEach(f => {
+    const li = document.createElement('li');
+    li.innerText = f;
+    li.className='fail';
+    fList.appendChild(li);
+  });
+  // Achievements
+  const aList = document.getElementById('weeklyAchievements');
+  aList.innerHTML = '';
+  userProgressData.weekly.keyAchievements.forEach(a => {
+    const li = document.createElement('li');
+    li.innerText = a;
+    aList.appendChild(li);
+  });
+
+  // Bar Chart for weekly tasks
+  const ctxBar = document.getElementById('weeklyBar').getContext('2d');
+  if (weeklyBar) weeklyBar.destroy();
+  weeklyBar = new Chart(ctxBar, {
+    type: 'bar',
+    data: {
+      labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+      datasets: [{
+        label: 'Tasks Completed',
+        data: Array.from({length:7}, ()=> Math.floor(Math.random() * 5 + 1)),
+        backgroundColor: '#66BB6A'
+      }]
+    },
+    options: { responsive:true, scales: { y: { beginAtZero:true } } }
+  });
+
+  // Pie chart for challenges, achievements, failures
+  const ctxPie = document.getElementById('weeklyPie').getContext('2d');
+  if (weeklyPie) weeklyPie.destroy();
+  weeklyPie = new Chart(ctxPie, {
+    type: 'pie',
+    data: {
+      labels: ['Challenges', 'Achievements', 'Failures'],
+      datasets: [{
+        data: [userProgressData.weekly.challenges.length, userProgressData.weekly.keyAchievements.length, userProgressData.weekly.failures.length],
+        backgroundColor: ['#EF5350', '#FFA726', '#8D6E63']
+      }]
+    },
+    options: { responsive:true, plugins: { legend: { position: 'bottom' } } }
+  });
+}
+
+// --- Monthly Progress ---
+function renderMonthlyProgress() {
+  const container = document.getElementById('progress-monthly');
+  container.innerHTML = `
+    <div class="card">
+      <h3 style="text-align:center;">Monthly Progress (Roadmap / Achievements / Badges & Medals)</h3>
+      <h4>Achievements this month:</h4>
+      <ul id="monthlyAchievements"></ul>
+      <h4>Streaks:</h4>
+      <p>Current streak: ${userProgressData.monthly.streaks.slice(-1)[0]} days</p>
+      <h4>Badges Earned:</h4>
+      <ul id="badges"></ul>
+      <h4>Medals Gained:</h4>
+      <ul id="medals"></ul>
+      <h4>Performance over the Week:</h4>
+      <canvas id="monthlyScatter"></canvas>
+    </div>
+  `;
+
+  // Achievements
+  const achList = document.getElementById('monthlyAchievements');
+  achList.innerHTML = '';
+  userProgressData.monthly.achievements.forEach(a => {
+    const li = document.createElement('li');
+    li.innerText = a;
+    achList.appendChild(li);
+  });
+  // Badges
+  const badgesEl = document.getElementById('badges');
+  badgesEl.innerHTML = '';
+  userProgressData.monthly.badges.forEach(b => {
+    const li = document.createElement('li');
+    li.innerText = b;
+    badgesEl.appendChild(li);
+  });
+  // Medals
+  const medalsEl = document.getElementById('medals');
+  medalsEl.innerHTML = '';
+  userProgressData.monthly.medals.forEach(m => {
+    const li = document.createElement('li');
+    li.innerText = m;
+    medalsEl.appendChild(li);
+  });
+
+  // Scatter plot of performance over the week
+  const ctx = document.getElementById('monthlyScatter').getContext('2d');
+  if (monthlyScatter) monthlyScatter.destroy();
+
+  // Generate sample data for 7 days
+  const daysOfWeek = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const dataPoints = daysOfWeek.map((day, index) => ({
+    x: index,
+    y: Math.floor(Math.random() * 10 + 1)
+  }));
+  // Highlight max
+  const maxY = Math.max(...dataPoints.map(p => p.y));
+  dataPoints.forEach(p => { p.markerColor = (p.y===maxY) ? 'red' : 'blue'; });
+
+  monthlyScatter = new Chart(ctx, {
+    type: 'scatter',
+    data: {
+      datasets: [{
+        label: 'Work Done',
+        data: dataPoints,
+        backgroundColor: dataPoints.map(p => p.markerColor),
+        pointBackgroundColor: dataPoints.map(p => p.markerColor),
+        pointRadius: 8,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        tooltip: { callbacks: { label: function(c) { return `Work: ${c.raw.y}`; } } },
+        legend: { display: false }
+      },
+      scales: {
+        x: {
+          title: { display: true, text: 'Day of Week' },
+          ticks: { callback: function(val, index) { return daysOfWeek[index]; } },
+          grid: { display: false }
+        },
+        y: {
+          title: { display: true, text: 'Work Done' },
+          beginAtZero: true
+        }
+      }
+    }
+  });
+}
+
+// --- Yearly Progress ---
+function renderYearlyProgress() {
+  const container = document.getElementById('progress-yearly');
+  container.innerHTML = `
+    <div class="card">
+      <h3 style="text-align:center;">Yearly Progress (Skill Mastery & Achievements)</h3>
+      <canvas id="yearlyRadar"></canvas>
+      <h4>Badges Earned This Year:</h4>
+      <canvas id="badgesBar"></canvas>
+      <h4>Total Achievements & Stats:</h4>
+      <p>Total Commits: ${userProgressData.yearly.totalCommits}</p>
+      <p>Total Features: ${userProgressData.yearly.totalFeatures}</p>
+      <p>Total Bugs Fixed: ${userProgressData.yearly.totalBugsFixed}</p>
+    </div>
+  `;
+
+  // Radar Chart for skills
+  const ctxRadar = document.getElementById('yearlyRadar').getContext('2d');
+  if (window.yearlyRadar) yearlyRadar.destroy();
+  window.yearlyRadar = new Chart(ctxRadar, {
+    type: 'radar',
+    data: {
+      labels: Object.keys(userProgressData.yearly.skillProgress),
+      datasets: [{
+        label: 'Skill Mastery (%)',
+        data: Object.values(userProgressData.yearly.skillProgress),
+        backgroundColor: 'rgba(255,159,64,0.2)',
+        borderColor: '#ff9f40',
+        pointBackgroundColor: '#ff9f40'
+      }]
+    },
+    options: {
+      responsive:true,
+      scales: {
+        r: {
+          beginAtZero: true,
+          max: 100
+        }
+      }
+    }
+  });
+
+  // Badges Bar Chart
+  const ctxBar = document.getElementById('badgesBar').getContext('2d');
+  if (window.badgesBarChart) badgesBarChart.destroy();
+  window.badgesBarChart = new Chart(ctxBar, {
+    type: 'bar',
+    data: {
+      labels: userProgressData.yearly.badgesEarned,
+      datasets: [{
+        label: 'Badges Gained',
+        data: userProgressData.yearly.badgesEarned.map(() => Math.floor(Math.random() * 10 + 1)),
+        backgroundColor: '#AB47BC'
+      }]
+    },
+    options: { responsive:true, scales: { y: { beginAtZero:true } } }
+  });
+}
+
+// Initialize default view
+showProgressPart('today');
+
+</script>
+
+
+
+
 
 <!-- Motivation -->
 <div id="motivation" class="section" style="display:none;">
@@ -336,7 +1135,7 @@
     progress: [2, 4, 6, 8, 10]
   };
 
-  let weeklyChart;
+  let weeklyChart ;
   function loadWeeklyProgress() {
     // Destroy previous if exists
     if(weeklyChart) weeklyChart.destroy();
