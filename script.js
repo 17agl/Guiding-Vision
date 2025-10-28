@@ -73,13 +73,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Sign Up button
-  const signUpBtn = document.querySelector('.content button.btn');
-  if (signUpBtn) {
-    signUpBtn.addEventListener('click', () => {
-      alert('Account creation feature coming soon!');
-    });
-  }
+  // Sign Up/create account button
+  // const signUpBtn = document.querySelector('.content button.btn');
+  // if (signUpBtn) {
+  //   signUpBtn.addEventListener('click', () => {
+  //     alert('Account creation feature coming soon!');
+  //   });
+  // }
 
   // Additional interactivity can be added here
 });
@@ -105,12 +105,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  const signUpBtn = document.querySelector('.content button.btn');
-  if (signUpBtn && signUpBtn.parentElement.id !== 'create-account') {
-    signUpBtn.addEventListener('click', () => {
-      alert('Account creation feature coming soon!');
-    });
-  }
+  // const signUpBtn = document.querySelector('.content button.btn');
+  // if (signUpBtn && signUpBtn.parentElement.id !== 'create-account') {
+  //   signUpBtn.addEventListener('click', () => {
+  //     alert('Account creation feature coming soon!');
+  //   });
+  // }
 
   // Handle form submission
   const form = document.getElementById('registerForm');
@@ -138,170 +138,3 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
-
-// hvubhfgbc f7bk todays task
-// // On page load, retrieve addiction info and display
-// window.onload = () => {
-//   // Retrieve stored addiction info
-//   const addictionData = JSON.parse(localStorage.getItem('addictionData')) || {};
-//   const { addictionType, duration } = addictionData;
-
-//   const userInfoDiv = document.getElementById('user-info');
-//   userInfoDiv.innerHTML = `
-//     <strong>Addiction Type:</strong> ${addictionType || 'N/A'}<br/>
-//     <strong>Duration:</strong> ${duration || 'N/A'}
-//   `;
-
-//   // Load existing checklist if any
-//   loadChecklist();
-// };
-
-// // Generate checklist from multi-line input
-// function generateChecklist() {
-//   const inputText = document.getElementById('task-input').value.trim();
-//   if (!inputText) {
-//     alert('Please enter some tasks.');
-//     return;
-//   }
-
-//   const tasks = inputText.split('\n').map(t => t.trim()).filter(t => t !== '');
-//   const checklistContainer = document.getElementById('checklist-container');
-
-//   // Retrieve existing checklist
-//   let existingGoals = JSON.parse(localStorage.getItem('goalsChecklist')) || [];
-
-//   // Clear current
-//   checklistContainer.innerHTML = '';
-
-//   // Get addiction info for color coding
-//   const addictionData = JSON.parse(localStorage.getItem('addictionData')) || {};
-//   const { addictionType } = addictionData;
-
-//   // Determine color based on addiction type
-//   let bgColor = '#c8e6c9'; // default
-//   if (addictionType) {
-//     switch (addictionType.toLowerCase()) {
-//       case 'smoking':
-//         bgColor = '#ffe0b2'; // orange
-//         break;
-//       case 'social media':
-//         bgColor = '#b2ebf2'; // blue
-//         break;
-//       case 'alcohol':
-//         bgColor = '#ffe0e0'; // red
-//         break;
-//       case 'gaming':
-//         bgColor = '#e1bee7'; // purple
-//         break;
-//       default:
-//         bgColor = '#c8e6c9'; // greenish
-//     }
-//   }
-
-//   // Generate goals with color
-//   tasks.forEach(task => {
-//     const goalObj = {
-//       text: task,
-//       checked: false,
-//       addictionType: addictionType || '',
-//       duration: (addictionData && addictionData.duration) || ''
-//     };
-//     existingGoals.push(goalObj);
-
-//     const div = document.createElement('div');
-//     div.className = 'goal-item';
-//     div.style.backgroundColor = bgColor;
-
-//     const checkbox = document.createElement('input');
-//     checkbox.type = 'checkbox';
-//     checkbox.onclick = () => {
-//       goalObj.checked = checkbox.checked;
-//     };
-
-//     const span = document.createElement('span');
-//     span.className = 'goal-text';
-//     span.innerText = task;
-
-//     const deleteBtn = document.createElement('button');
-//     deleteBtn.innerText = '🗑️';
-//     deleteBtn.onclick = () => {
-//       existingGoals.splice(existingGoals.indexOf(goalObj), 1);
-//       saveGoals();
-//       loadChecklist();
-//     };
-
-//     div.appendChild(checkbox);
-//     div.appendChild(span);
-//     div.appendChild(deleteBtn);
-//     document.getElementById('checklist-container').appendChild(div);
-//   });
-
-//   // Save updated goals
-//   saveGoals();
-// }
-
-// // Load goals from local storage
-// function loadChecklist() {
-//   const goals = JSON.parse(localStorage.getItem('goalsChecklist')) || [];
-//   const container = document.getElementById('checklist-container');
-//   container.innerHTML = '';
-
-//   // Get addiction info for color coding
-//   const addictionData = JSON.parse(localStorage.getItem('addictionData')) || {};
-//   const { addictionType } = addictionData;
-
-//   let bgColor = '#c8e6c9'; // default
-//   if (addictionType) {
-//     switch (addictionType.toLowerCase()) {
-//       case 'smoking':
-//         bgColor = '#ffe0b2';
-//         break;
-//       case 'social media':
-//         bgColor = '#b2ebf2';
-//         break;
-//       case 'alcohol':
-//         bgColor = '#ffe0e0';
-//         break;
-//       case 'gaming':
-//         bgColor = '#e1bee7';
-//         break;
-//       default:
-//         bgColor = '#c8e6c9';
-//     }
-//   }
-
-//   goals.forEach(goal => {
-//     const div = document.createElement('div');
-//     div.className = 'goal-item';
-//     div.style.backgroundColor = bgColor;
-
-//     const checkbox = document.createElement('input');
-//     checkbox.type = 'checkbox';
-//     checkbox.checked = goal.checked;
-//     checkbox.onclick = () => {
-//       goal.checked = checkbox.checked;
-//     };
-
-//     const span = document.createElement('span');
-//     span.className = 'goal-text';
-//     span.innerText = goal.text;
-
-//     const deleteBtn = document.createElement('button');
-//     deleteBtn.innerText = '🗑️';
-//     deleteBtn.onclick = () => {
-//       goals.splice(goals.indexOf(goal), 1);
-//       saveGoals();
-//       loadChecklist();
-//     };
-
-//     div.appendChild(checkbox);
-//     div.appendChild(span);
-//     div.appendChild(deleteBtn);
-//     document.getElementById('checklist-container').appendChild(div);
-//   });
-// }
-
-// // Save goals to local storage
-// function saveGoals() {
-//   localStorage.setItem('goalsChecklist', JSON.stringify(JSON.parse(localStorage.getItem('goalsChecklist')) || []));
-// }
